@@ -1,0 +1,7 @@
+{
+    "Name": "devTools",
+    "ID": "devtools",
+    "Version": "1.0.0",
+    "Description": "Adds some developer tools to the game",
+    "Dependencies": []
+}

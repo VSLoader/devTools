@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VS</title>
+  <script>
+    // https://stackoverflow.com/a/2995536
+    document.head = document.head || document.getElementsByTagName("head")[0];
+
+    function changeFavicon(src) {
+      var link = document.createElement("link"),
+        oldLink = document.getElementById("dynamic-favicon");
+      link.id = "dynamic-favicon";
+      link.rel = "shortcut icon";
+      link.href = src;
+      if (oldLink) {
+        document.head.removeChild(oldLink);
+      }
+      document.head.appendChild(link);
+    }
+    const icon_red = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMrSURBVFhHxZe9a1NRGMZPo9YggtUOareABRUK1aFQPyB1ERGx4qiDm4NC/4SS/8AgDu6layuC4mIr1aVDrTooonSr37WDSOP373d7b0ialKRJEx94+t7cS8/znPd8vacj1InREHoIQzD7N4R+mIFdfqORZbgA5/k5DadyISz6rRZqGkC4jzDyJ4ThXyF0E8M2uANuh6IAv8OfMAW3hvCFOMljHiMviOtiXQMI7zQgeP1HCGl/HIIH4F6ogU4o+B4Z+ADfwJfwG+R7ASM3ecxhxFcVqGoAcbXGaPhomocT8AjcDevBV/gUPoYrECNzhMuY0FsZKgwgPkC4wz/uO8jDGWiPG4EZuQ9fQTrynnAeE7PEIsoMxD1/qPhxHk7DJM2NwuF5AJ/A2MSp0kxsiWMy5ncR71X8LGQyNQ0FeqFDsYAGbQ5mQxh/tOotmrQJRh1z027PSz80C9uyTdtWg0B/VxENAb/6mO2zuEtf5XejY14LzonbkOW8gqkBl2jS0RGcpZ3trRIXtn0SqkUY8V0Hve+h98+ZbN3XeFHvUmsULtFbEBNL9L7PDAy5wzn9Wy0u1FALzT2EIQ1k3V7d4doFtdQE2ZQHi3t7K8d+LdRSU20NZNzXZbuQ6KmtgS5PtWZ3vI1ALTXVTpbhf0OKnWjZ85xl0TaopabaGljwLJftQqKntgbmrWTcJtsFtdRU2zkw7R8rmXZBrXjyRdpT1nAe0G6TrYYaaqG5RJhKcSIt4mLSgs0yqtWwbFYLzYlYO0KetVmwhmvlXLDtGagWIe+7qCKiOvlIwb+Lt8dM0eHkwybCpTcBNUH6b9D7Md8nGRA5nM1ZQFrDxYfFpsC2bNO20XCk0V9FsaPWaNRqM7i7aO1mDZeBzWbCnlsZlxSlVsbFW1NZ+5j4HJs4p4l3vNsPrVYbgek27XY5Fh9G3HlYBHtBJeLyvHgxsYzqhxu5mKjihDOTcdovIV5xMama4TgT43zs/I2J18ybZ7z/BN3BhOPKaWZlE22rir6FpvoeVIneFZxwPF4pTXspqmagFFbMBC+nFyyjFK7jcmq9Z/Ybv5yuhcUrYZOv5yH8AyKi5NwXSx5oAAAAAElFTkSuQmCC";
+    const icon_green = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANdSURBVFhHxZdBTxNBGIa/LaUtSirKQeFGIokcSNSDiVGT4sUYY8R49R9owk9o+hOI8R8Yj6Ix0XgRCJoYD4B6wIMJJ1GMIhpUCsX6Pt9uodVWkLL4JrNlmN3veWd2ZvabwLaqfLZb1wGVnJXtqEqPSoe3BbaoMqsyrdqYyqgVvs552yba3EA+26/rkP20QSuVO/Vr1qrH9qiko8eLZbPvKqsqCdWTwSf93tVfwzLyyu9poMYG8tl2rgJet5VyxtoVua/V7HDK7GCLDKieih5fwYCcza+ZvVkxm1k1W1I9FRRl5IbuKMjIUnhzreobyGf7dL2lwMcto1tOt5kdS5vtF9gfEbCuorbPMjJVNHvyw2xZ9VQwqYarMjHjt1XpTwP57Ald7+nBQ3ZEPT6/Vz1Ohm3/qvmS2cNvZq81Ipngvf5zSSaeh42hag2EPX/s8FMZs3OCV4Z5u+L1PJKJp8sVE2erR4IxDRW+8/uC9zr8gqrJJuGoRTF6NW+WNSdmS+2KedJy6ds2XtRkCedsRXl/5ww7Pa9uaVbEIiaxYcCKFGJYasx2JhzvvNlhrydiEhsGrHB5r/dzSM4yPtu3O+G2ImKfEQMWTCmQk245eimHnXZtX7TUYhRL9OYXTCyo+/2MwIDvcGwyccMRDFil8gHVBjCQ8+2VHa7OtrDzEgMWTLET/mFhb2d7bbjD7aTEgAVTbAz0+IeFvX23BAum2Bjo8K9aHEuvkWDBFHsXu11fCc2JRf+es2fvlmDBFBsDs55M8D3fLcGCKTYGpj2TIZlQJX6JAQum2MyBMd+QyWQ0K+KXGLDC2TfGz6jncKRRbJNxCwasZLCg2mhCycGc3Nz1HI40Km5NiwErYSOwK8twWGuz6DkcaVRcIvaEGLBgSqEBUmeyVxJIcrg4liQxiQ0DVpSuV0YAFeRs0hNIcridXJXEIiaxU8GUagX/v7Tx/SVHy6UnNDmueO5GDtejzyY5XTOq9HwjKSUzXj811SYA48WPkYmLbuKd3lmXshgOJdsR73xE55EpLbsQPig4x7d11RpA48W3MvHAs9cPa132QvOFIeSz0YaRv41I1MZSe6Ye3xGcTSftw07Pa+CocbT/ejSr1sbh9LKnUYzG5odT8r0R/dXE4fR3xXI8N/sFbVNbsJO0VA4AAAAASUVORK5CYII=";
+    changeFavicon(icon_red);
+  </script>
+  <script src="websocketR2.js"></script>
+</head>
+<body>
+  <fieldset>
+    <div>
+      <label for="song-file">Raw S16 PCM</label>
+      <input type="file" id="song-file">
+    </div>
+    <div>
+      <input type="checkbox" id="stereo" name="stereo" checked />
+      <label for="stereo">Stereo</label>
+    </div>
+    <div>
+      <label for="rate-select">Sample rate</label>
+      <select name="rates" id="rate-select">
+        <option value=8000>8000Hz</option>
+        <option value=11025>11025Hz</option>
+        <option value=16000>16000Hz</option>
+        <option value=22050>22050Hz</option>
+        <option value=32000>32000Hz</option>
+        <option value=44100 selected>44100Hz</option>
+        <option value=48000>48000Hz</option>
+      </select>
+    </div>
+    <div>
+      <button onclick="setAudio()">Set audio</button>
+      <span id="audio-status"></span>
+    </div>
+  </fieldset>
+  <script>
+    const ws = new WebSocketR2("ws://localhost:12345");
+
+    function ws_request(message_type, message_data = undefined) {
+      const message = { type: message_type, data: message_data };
+      return new Promise((resolve, reject) => {
+        ws.send(message, reply => { resolve(reply.data) });
+      });
+    }
+
+    function ws_request_raw(data) {
+      return new Promise((resolve, reject) => {
+        ws.sendRaw(data, reply => { resolve(reply.data) });
+      });
+    }
+
+    let ws_heartbeat;
+    function heartbeat() {
+      ws_heartbeat = setTimeout(() => {
+        ws_request("ping").then(() => {
+          changeFavicon(icon_green);
+          setTimeout(() => {
+            changeFavicon(icon_red);
+          }, 200);
+          heartbeat();
+        });
+      }, 2000);
+    }
+
+    ws.onopen(() => {
+      heartbeat();
+    });
+
+    ws.onclose(() => {
+      console.log("Connection closed");
+      if (ws_heartbeat)
+        clearTimeout(ws_heartbeat);
+    });
+
+    async function listGlobals() {
+      return await ws_request("listGlobals");
+    }
+
+    async function getGlobal(name) {
+      return await ws_request("getGlobal", name);
+    }
+
+    async function setGlobal(name, value) {
+      return await ws_request("setGlobal", { name, value });
+    }
+
+    // https://stackoverflow.com/a/9458996
+    function _arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = new Uint8Array(buffer);
+      var len = bytes.byteLength;
+      for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return window.btoa(binary);
+    }
+
+    async function setAudio() {
+      const songFile = document.getElementById('song-file');
+      if (!songFile.files.length)
+        return;
+      const file = songFile.files[0];
+      const data = await file.arrayBuffer();
+      const chunkSize = 60000;
+      document.getElementById('audio-status').innerText = "Uploading audio...";
+      await ws_request("setAudio", { progress: 0 });
+      for (i = 0; i < data.byteLength; i += chunkSize)
+        await ws_request_raw(data.slice(i, i + chunkSize));
+      const stereo = document.getElementById('stereo').checked;
+      const rate = parseInt(document.getElementById('rate-select').value);
+      await ws_request("setAudio", { progress: 2, rate, stereo });
+      document.getElementById('audio-status').innerText = "Audio sent";
+    }
+  </script>
+</body>
+</html>
